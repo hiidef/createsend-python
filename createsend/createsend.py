@@ -46,7 +46,7 @@ class CreateSendBase(object):
     if username and password:
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
     else:
-      headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % CreateSend.api_key)
+      headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % getattr(self,"api_key",CreateSend.api_key))
 
     """If in fake web mode (i.e. self.stub_request has been called), 
     self.faker should be set, and this request should be treated as a fake."""
@@ -104,6 +104,11 @@ class CreateSend(CreateSendBase):
   """Provides high level CreateSend functionality/data you'll probably need."""
   base_uri = "http://api.createsend.com/api/v3"
   api_key = ""
+
+  def __init__(self, api_key=None):
+    if api_key:
+      self.api_key = api_key
+    super(CreateSend, self).__init__()
 
   def apikey(self, site_url, username, password):
     """Gets your CreateSend API key, given your site url, username and password."""

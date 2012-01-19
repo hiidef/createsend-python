@@ -8,8 +8,10 @@ from utils import json_to_py
 class Client(CreateSendBase):
   """Represents a client and associated functionality."""
 
-  def __init__(self, client_id=None):
+  def __init__(self, client_id=None, api_key=None):
     self.client_id = client_id
+    if api_key:
+      self.api_key = api_key
     super(Client, self).__init__()
 
   def create(self, company, contact_name, email, timezone, country):

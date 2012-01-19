@@ -8,8 +8,10 @@ from utils import json_to_py
 class Template(CreateSendBase):
   """Represents an email template and associated functionality."""
 
-  def __init__(self, template_id=None):
+  def __init__(self, template_id=None, api_key=None):
     self.template_id = template_id
+    if api_key:
+      self.api_key = api_key
     super(Template, self).__init__()
 
   def create(self, client_id, name, html_url, zip_url):

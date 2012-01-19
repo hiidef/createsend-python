@@ -9,8 +9,10 @@ from utils import json_to_py
 class List(CreateSendBase):
   """Represents a subscriber list and associated functionality."""
 
-  def __init__(self, list_id=None):
+  def __init__(self, list_id=None, api_key=None):
     self.list_id = list_id
+    if api_key:
+      self.api_key = api_key
     super(List, self).__init__()
 
   def create(self, client_id, title, unsubscribe_page, confirmed_opt_in, confirmation_success_page):
